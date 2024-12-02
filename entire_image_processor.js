@@ -56,7 +56,7 @@ class ImageProcessor {
         }
     }
 
-    async processChunk(rawEntities, batchSize) {
+    async processChunk(rawEntities) {
         const tasks = rawEntities.map(rawEntity => this.createThumbnail(rawEntity));
 
         return Promise.all(tasks);
@@ -74,7 +74,7 @@ class ImageProcessor {
             return rawEntity;
         } catch (error) {
             this.logger.error(`Error creating thumbnail for ID ${rawEntity.id}: ${error.message}`);
-            return null;
+            return null;//return null in catch bad idea
         }
     }
 
